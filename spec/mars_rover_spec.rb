@@ -51,6 +51,32 @@ describe 'MarsRovers' do
     end
   end
 
+  context 'turns right' do
+    it 'point to EAST when turn right from NORTH' do
+      rover = MarsRover.new('N',0,0)
+      rover.execute 'r'
+      expect(rover.direction).to eql 'E'
+    end
+
+    it 'point to SOUTH when turn right from EAST' do
+      rover = MarsRover.new('E',0,0)
+      rover.execute 'r'
+      expect(rover.direction).to eql 'S'
+    end
+
+    it 'point to WEST when turn right from SOUTH' do
+      rover = MarsRover.new('S',0,0)
+      rover.execute 'r'
+      expect(rover.direction).to eql 'W'
+    end
+
+    it 'point to NORTH when turn right from WEST' do
+      rover = MarsRover.new('W',0,0)
+      rover.execute 'r'
+      expect(rover.direction).to eql 'N'
+    end
+  end
+
   context 'basic movement' do
     it 'moves forward' do
       rover.execute('f')

@@ -10,6 +10,7 @@ class MarsRover
   def execute(command)
     move_forward if command.eql? 'f'
     move_left if command.eql? 'l'
+    move_right if command.eql? 'r'
   end
 
   protected
@@ -24,6 +25,16 @@ class MarsRover
         'W' => 'S',
         'S' => 'E',
         'E' => 'N'
+    }
+    @direction = turns[@direction]
+  end
+
+  def move_right
+    turns={
+        'N' => 'E',
+        'E' => 'S',
+        'S' => 'W',
+        'W' => 'N'
     }
     @direction = turns[@direction]
   end

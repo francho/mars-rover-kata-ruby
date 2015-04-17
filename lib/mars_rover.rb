@@ -1,6 +1,6 @@
 class MarsRover
-  attr_accessor :direction
-  attr_accessor :position
+  attr_reader :direction
+  attr_reader :position
 
   def initialize(initial_direction, initial_x, initial_y)
     @direction=initial_direction
@@ -8,13 +8,24 @@ class MarsRover
   end
 
   def execute(command)
-    move_forward if command=='f'
+    move_forward if command.eql? 'f'
+    move_left if command.eql? 'l'
   end
 
   protected
 
   def move_forward
     @position[:y]+=1
+  end
+
+  def move_left
+    turns={
+        'N' => 'W',
+        'W' => 'S',
+        'S' => 'E',
+        'E' => 'N'
+    }
+    @direction = turns[@direction]
   end
 
 end

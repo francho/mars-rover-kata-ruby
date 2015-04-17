@@ -21,20 +21,20 @@ class MarsRover
 
   def move_left
     turns={
-        'N' => 'W',
-        'W' => 'S',
-        'S' => 'E',
-        'E' => 'N'
+        :N => :W,
+        :W => :S,
+        :S => :E,
+        :E => :N
     }
     @direction = turns[@direction]
   end
 
   def move_right
     turns={
-        'N' => 'E',
-        'E' => 'S',
-        'S' => 'W',
-        'W' => 'N'
+        :N => :E,
+        :E => :S,
+        :S => :W,
+        :W => :N
     }
     @direction = turns[@direction]
   end

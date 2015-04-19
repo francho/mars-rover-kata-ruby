@@ -20,7 +20,8 @@ describe 'MarsRovers' do
     end
 
     it 'starts at concrete position and compass' do
-      expect(rover.position).to include(compass: :N, x: 0, y: 0)
+      expect(rover.position).to include(x: 0, y: 0)
+      expect(rover.compass).to eql :N
     end
   end
 
@@ -76,10 +77,33 @@ describe 'MarsRovers' do
     end
   end
 
-  context 'basic movement' do
-    it 'moves forward' do
+  context 'moves forward' do
+    it 'moves to north' do
+      rover = MarsRover.new(:N,1,1)
+      rover.execute('f')
+      expect(rover.position).to include(x: 1, y: 0)
+      expect(rover.compass).to be :N
+    end
+
+    it 'moves to east' do
+      rover = MarsRover.new(:E,1,1)
+      rover.execute('f')
+      expect(rover.position).to include(x: 2, y: 1)
+      expect(rover.compass).to be :E
+    end
+
+    it 'moves to south' do
+      rover = MarsRover.new(:S,1,1)
+      rover.execute('f')
+      expect(rover.position).to include(x: 1, y: 2)
+      expect(rover.compass).to be :S
+    end
+
+    it 'moves to west' do
+      rover = MarsRover.new(:W,1,1)
       rover.execute('f')
       expect(rover.position).to include(x: 0, y: 1)
+      expect(rover.compass).to be :W
     end
   end
 

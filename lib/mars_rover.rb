@@ -9,8 +9,8 @@ class MarsRover
 
   def execute(command)
     move_forward if command.eql? 'f'
-    move_left if command.eql? 'l'
-    move_right if command.eql? 'r'
+    turn_left if command.eql? 'l'
+    turn_right if command.eql? 'r'
   end
 
   protected
@@ -19,24 +19,24 @@ class MarsRover
     @position[:y]+=1
   end
 
-  def move_left
-    turns={
-        :N => :W,
-        :W => :S,
-        :S => :E,
-        :E => :N
-    }
-    @direction = turns[@direction]
+  def turn_left
+    @direction = turn -1
   end
 
-  def move_right
-    turns={
-        :N => :E,
-        :E => :S,
-        :S => :W,
-        :W => :N
-    }
-    @direction = turns[@direction]
+  def turn_right
+    @direction = turn +1
+  end
+
+  protected
+  def turn(offset)
+    cardinal_points = [:N, :E, :S, :W]
+    current_point = cardinal_points.index(@direction)
+
+    current_point+=offset
+    current_point=0 if current_point>cardinal_points.count-1
+    current_point=cardinal_points.count-1 if current_point<0
+
+    cardinal_points[current_point]
   end
 
 end
